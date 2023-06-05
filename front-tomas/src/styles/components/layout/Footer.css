@@ -1,0 +1,15 @@
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark-brown);
+  padding: 10px;
+}
+.footer__logo {
+  margin-right: 10px;
+}
+
+footer .footer__copyr {
+  color: #fff;
+  margin-left: 10px;
+}

@@ -1,0 +1,67 @@
+/* Hago la parte del main */
+main {
+  background-color: #f2f2f2;
+}
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 1200px;
+}
+
+.main__img {
+  height: 300px; /* public/images/inicio/ */
+  background-image: url(../../../../images/inicio/cryptos.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.main__info {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  margin: 20px 10px;
+  padding: 10px 20px;
+  gap: 20px;
+}
+
+/* Haciendo la parte de bienvenido */
+.main__info-bienvenido h2 {
+  font-size: 35px;
+  color: var(--dark-brown);
+  margin-bottom: 20px;
+}
+.main__info-bienvenido p {
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+
+.main__info-bienvenido-img {
+  width: 90%;
+}
+
+/* Haciendo el aside */
+.main__info-aside h2 {
+  color: var(--dark-brown);
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+.main__info-aside-cuadro {
+  background: linear-gradient(210deg, var(--blue), var(--violet));
+  padding: 20px;
+  box-shadow: 0 10px 20px #6046f1;
+}
+.main__info-aside-cuadro p {
+  font-size: 30px;
+  font-weight: 700;
+  font-style: italic;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.main__info-aside-cuadro h4 {
+  text-align: right;
+}

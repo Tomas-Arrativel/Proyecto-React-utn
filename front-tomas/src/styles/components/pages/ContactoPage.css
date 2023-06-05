@@ -1,0 +1,76 @@
+.main__contacto {
+  min-height: 81.15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__contacto-formulario {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+
+.formulario h2 {
+  margin-top: 10px;
+}
+.formulario {
+  width: 50%;
+}
+
+.formulario .form {
+  margin-top: 20px;
+}
+.formulario .form div {
+  display: flex;
+  align-items: center;
+  margin: 7px 0;
+}
+.formulario .form div:last-child {
+  align-items: start;
+}
+.formulario .form div label {
+  flex-grow: 1;
+  width: 20%;
+}
+.formulario .form div label:last-of-type {
+  margin-top: 7px;
+}
+.formulario .form div input,
+.formulario .form div textarea {
+  width: 80%;
+  padding: 10px;
+}
+.formulario .form div input:focus,
+.formulario .form div textarea:focus {
+  outline: none;
+}
+.formulario .form div textarea {
+  height: 150px;
+  resize: none;
+}
+
+.form-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background-color: var(--bluish-violet);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.form-btn:hover {
+  box-shadow: 0 10px 20px var(--violet);
+}
+
+.mas-formas {
+  width: 50%;
+}
+.mas-formas p {
+  margin: 10px 0 20px 0;
+}
+.mas-formas ul {
+  margin-left: 40px;
+}

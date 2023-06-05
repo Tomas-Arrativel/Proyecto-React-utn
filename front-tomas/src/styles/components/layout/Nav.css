@@ -1,0 +1,17 @@
+.header__list {
+  display: flex;
+  margin-right: 40px;
+}
+
+.header__list-links {
+  padding: 30px;
+  list-style: none;
+  transition: all 0.3s;
+  color: #fff;
+}
+.header__list-links:hover {
+  background-color: #1a1203;
+}
+.header__list-links.active {
+  border-bottom: 3px solid var(--orange);
+}
