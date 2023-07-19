@@ -1,0 +1,26 @@
+<form action='/admin/login' method='post' class='login__container'>
+  <div class='form-floating mb-3'>
+    <input
+      type='text'
+      class='form-control'
+      id='floatingInput'
+      name='user'
+      placeholder='Usuario'
+    />
+    <label for='floatingInput'>Usuario</label>
+  </div>
+  <div class='form-floating'>
+    <input
+      type='password'
+      class='form-control'
+      id='floatingPassword'
+      name='password'
+      placeholder='Password'
+    />
+    <label for='floatingPassword'>Contraseña</label>
+  </div>
+  <button type='submit' class='login__container-btn'>Ingresar</button>
+  {{#if error}}
+    <p class='login__error'>Usuario y/o contraseña incorrectos</p>
+  {{/if}}
+</form>
