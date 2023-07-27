@@ -1,0 +1,37 @@
+<form action='/admin/novedades/nuevo' class='w-50' method='post'>
+  <h1>Ingrese la nueva novedad</h1>
+
+  <div class='form-floating mb-3'>
+    <input
+      type='text'
+      class='form-control'
+      id='floatingTitulo'
+      name='titulo'
+      placeholder='Titulo'
+    />
+    <label for='floatingTitulo'>Titulo</label>
+  </div>
+  <div class='form-floating mb-3'>
+    <input
+      type='text'
+      class='form-control'
+      id='floatingSubtitulo'
+      name='subtitulo'
+      placeholder='Subtitulo'
+    />
+    <label for='floatingSubtitulo'>Subtitulo</label>
+  </div>
+  <div class='form-floating mb-3'>
+    <textarea
+      class='form-control'
+      id='floatingCuerpo'
+      name='cuerpo'
+      placeholder='Cuerpo'
+    ></textarea>
+    <label for='floatingCuerpo'>Cuerpo</label>
+  </div>
+  <button type='submit' class='btn btn-success w-100 p-2'>Crear</button>
+  {{#if error}}
+    <p class='text-danger'>{{message}}</p>
+  {{/if}}
+</form>
