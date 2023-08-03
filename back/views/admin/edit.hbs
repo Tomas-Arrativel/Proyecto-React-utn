@@ -1,0 +1,40 @@
+<form action='/admin/novedades/edit' class='w-50' method='post'>
+  <h1>Edite la novedad con la id {{novedad.id}}</h1>
+
+  <div class='form-floating mb-3'>
+    <input type='hidden' value='{{novedad.id}}' name='id' />
+    <input
+      type='text'
+      class='form-control'
+      id='floatingTitulo'
+      name='titulo'
+      placeholder='Titulo'
+      value='{{novedad.titulo}}'
+    />
+    <label for='floatingTitulo'>Titulo</label>
+  </div>
+  <div class='form-floating mb-3'>
+    <input
+      type='text'
+      class='form-control'
+      id='floatingSubtitulo'
+      name='subtitulo'
+      placeholder='Subtitulo'
+      value='{{novedad.subtitulo}}'
+    />
+    <label for='floatingSubtitulo'>Subtitulo</label>
+  </div>
+  <div class='form-floating mb-3'>
+    <textarea
+      class='form-control'
+      id='floatingCuerpo'
+      name='cuerpo'
+      placeholder='Cuerpo'
+    >{{novedad.cuerpo}}</textarea>
+    <label for='floatingCuerpo'>Cuerpo</label>
+  </div>
+  <button type='submit' class='btn btn-success w-100 p-2'>Editar</button>
+  {{#if error}}
+    <p class='text-danger'>{{message}}</p>
+  {{/if}}
+</form>

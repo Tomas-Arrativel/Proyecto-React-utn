@@ -45,4 +45,51 @@ router.post('/nuevo', async (req, res, send) => {
   }
 });
 
+router.get('/eliminar/:id', async (req, res, next) => {
+  const id = req.params.id;
+  await novedadesModel.deleteNovedades(id);
+  res.redirect('/admin/novedades');
+});
+
+router.get('/edit/:id', async (req, res, next) => {
+  const id = req.params.id;
+  const novedad = await novedadesModel.getNovedadById(id);
+
+  res.render('admin/edit', {
+    layout: 'admin/layout',
+    novedad,
+  });
+});
+
+router.post('/edit', async (req, res, next) => {
+  try {
+    if (
+      req.body.titulo !== '' &&
+      req.body.subtitulo !== '' &&
+      req.body.cuerpo !== ''
+    ) {
+      const obj = {
+        titulo: req.body.titulo,
+        subtitulo: req.body.subtitulo,
+        cuerpo: req.body.cuerpo,
+      };
+      await novedadesModel.editNovedadesById(obj, req.body.id);
+      res.redirect('/admin/novedades');
+    } else {
+      res.render('admin/edit', {
+        layout: 'admin/layout',
+        error: true,
+        message: '¡Hay campos vacios!',
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.render('admin/edit', {
+      layout: 'admin/layout',
+      error: true,
+      message: 'No se modifico la novedad',
+    });
+  }
+});
+
 module.exports = router;

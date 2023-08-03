@@ -17,4 +17,32 @@ const insertNovedad = async function (obj) {
   }
 };
 
-module.exports = { getNovedades, insertNovedad };
+const deleteNovedades = async function (id) {
+  const query = 'delete from novedades where id = ?';
+  const rows = await pool.query(query, [id]);
+  return rows;
+};
+
+const getNovedadById = async function (id) {
+  const query = 'select * from novedades where id = ?';
+  const rows = await pool.query(query, [id]);
+  return rows[0];
+};
+
+const editNovedadesById = async function (obj, id) {
+  try {
+    const query = 'update novedades set ? where id = ?';
+    const rows = await pool.query(query, [obj, id]);
+    return rows;
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = {
+  getNovedades,
+  insertNovedad,
+  deleteNovedades,
+  getNovedadById,
+  editNovedadesById,
+};
