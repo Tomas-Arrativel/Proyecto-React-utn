@@ -1,4 +1,9 @@
-<form action='/admin/novedades/nuevo' class='w-50' method='post'>
+<form
+  action='/admin/novedades/nuevo'
+  class='w-50'
+  method='post'
+  enctype='multipart/form-data'
+>
   <h1>Ingrese la nueva novedad</h1>
 
   <div class='form-floating mb-3'>
@@ -9,7 +14,7 @@
       name='titulo'
       placeholder='Titulo'
     />
-    <label for='floatingTitulo'>Titulo</label>
+    <label for='floatingTitulo'>Titulo<sup class='text-danger'>*</sup></label>
   </div>
   <div class='form-floating mb-3'>
     <input
@@ -19,7 +24,9 @@
       name='subtitulo'
       placeholder='Subtitulo'
     />
-    <label for='floatingSubtitulo'>Subtitulo</label>
+    <label for='floatingSubtitulo'>Subtitulo<sup
+        class='text-danger'
+      >*</sup></label>
   </div>
   <div class='form-floating mb-3'>
     <textarea
@@ -28,7 +35,17 @@
       name='cuerpo'
       placeholder='Cuerpo'
     ></textarea>
-    <label for='floatingCuerpo'>Cuerpo</label>
+    <label for='floatingCuerpo'>Cuerpo<sup class='text-danger'>*</sup></label>
+  </div>
+  <div class='form-floating mb-3'>
+    <input
+      type='file'
+      class='form-control'
+      id='floatingImagen'
+      name='imagen'
+      placeholder='Imagen'
+    />
+    <label for='floatingImagen'>Imagen</label>
   </div>
   <button type='submit' class='btn btn-success w-100 p-2'>Crear</button>
   {{#if error}}

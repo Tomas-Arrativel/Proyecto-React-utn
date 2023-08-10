@@ -1,4 +1,9 @@
-<form action='/admin/novedades/edit' class='w-50' method='post'>
+<form
+  action='/admin/novedades/edit'
+  class='w-50'
+  method='post'
+  enctype='multipart/form-data'
+>
   <h1>Edite la novedad con la id {{novedad.id}}</h1>
 
   <div class='form-floating mb-3'>
@@ -33,6 +38,29 @@
     >{{novedad.cuerpo}}</textarea>
     <label for='floatingCuerpo'>Cuerpo</label>
   </div>
+
+  <div class='form-floating mb-3'>
+    <p>
+      <label for='floatingImagen'>Imagen</label><input
+        type='file'
+        class='form-control'
+        id='floatingImagen'
+        name='imagen'
+        placeholder='Imagen'
+      />
+    </p>
+    <p>
+      <label><input
+          type='checkbox'
+          name='img_delete'
+          id='img_delete'
+          value='1'
+          class='mx-2'
+        />Eliminar imagen actual?</label>
+      <input type='hidden' name='img_original' value='{{novedad.img_id}}' />
+    </p>
+  </div>
+
   <button type='submit' class='btn btn-success w-100 p-2'>Editar</button>
   {{#if error}}
     <p class='text-danger'>{{message}}</p>

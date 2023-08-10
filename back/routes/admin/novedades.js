@@ -1,10 +1,28 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const novedadesModel = require('../../models/novedadesModel');
+const util = require('util');
+const cloudinary = require('cloudinary').v2;
+const uploader = util.promisify(cloudinary.uploader.upload);
+const destroy = util.promisify(cloudinary.uploader.destroy);
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
-  const novedades = await novedadesModel.getNovedades();
+  let novedades = await novedadesModel.getNovedades();
+
+  novedades = novedades.map((novedad) => {
+    if (novedad.img_id) {
+      const imagen = cloudinary.image(novedad.img_id, {
+        width: 70,
+        height: 70,
+        crop: 'fill',
+      });
+      return {
+        ...novedad,
+        imagen,
+      };
+    } else return { ...novedad, imagen: '' };
+  });
 
   res.render('admin/novedades', {
     layout: 'admin/layout',
@@ -21,18 +39,24 @@ router.get('/nuevo', (req, res, send) => {
 
 router.post('/nuevo', async (req, res, send) => {
   try {
+    let img_id = '';
+    if (req.files && Object.keys(req.files).length > 0) {
+      imagen = req.files.imagen;
+      img_id = (await uploader(imagen.tempFilePath)).public_id;
+    }
+
     if (
       req.body.titulo !== '' &&
       req.body.subtitulo !== '' &&
       req.body.cuerpo !== ''
     ) {
-      await novedadesModel.insertNovedad(req.body);
+      await novedadesModel.insertNovedad({ ...req.body, img_id });
       res.redirect('/admin/novedades');
     } else {
       res.render('admin/nuevo', {
         layout: 'admin/layout',
         error: true,
-        message: '¡Todos los campos son requeridos!',
+        message: '¡Los campos marcados son requeridos!',
       });
     }
   } catch (err) {
@@ -47,6 +71,12 @@ router.post('/nuevo', async (req, res, send) => {
 
 router.get('/eliminar/:id', async (req, res, next) => {
   const id = req.params.id;
+
+  let novedad = await novedadesModel.getNovedadById(id);
+  if (novedad.img_id) {
+    await destroy(novedad.img_id);
+  }
+
   await novedadesModel.deleteNovedades(id);
   res.redirect('/admin/novedades');
 });
@@ -68,10 +98,27 @@ router.post('/edit', async (req, res, next) => {
       req.body.subtitulo !== '' &&
       req.body.cuerpo !== ''
     ) {
+      let img_id = req.body.img_original;
+      let borrarImgVieja = false;
+      if (req.body.img_delete === '1') {
+        img_id = null;
+        borrarImgVieja = true;
+      } else {
+        if (req.files && Object.keys(req.files).length > 0) {
+          imagen = req.files.imagen;
+          img_id = (await uploader(imagen.tempFilePath)).public_id;
+          borrarImgVieja = true;
+        }
+      }
+      if (borrarImgVieja && req.body.img_original) {
+        await destroy(req.body.img_original);
+      }
+
       const obj = {
         titulo: req.body.titulo,
         subtitulo: req.body.subtitulo,
         cuerpo: req.body.cuerpo,
+        img_id,
       };
       await novedadesModel.editNovedadesById(obj, req.body.id);
       res.redirect('/admin/novedades');
