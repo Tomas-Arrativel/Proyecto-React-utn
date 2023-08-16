@@ -42,9 +42,7 @@ footer {
   justify-content: center;
   background-color: #2a1d04;
   padding: 10px;
-  position: absolute;
   width: 100%;
-  bottom: 0;
 }
 .footer__logo {
   margin-right: 10px;
